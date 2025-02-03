@@ -6,14 +6,18 @@ import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @Builder
 public class Status {
 
-    private String status;
+    private int statusId;
+    @Field("status")
+    private List<String> status;
 
     @CreatedDate
     @Field("date")

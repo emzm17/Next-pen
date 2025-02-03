@@ -5,13 +5,17 @@ import com.example.codeService.entity.Code;
 import com.example.codeService.entity.Status;
 import com.example.codeService.request.CodeRequest;
 
+import java.util.List;
+
 public interface CodeService {
 
-    String pushIntoQueue(CodeRequest codeRequest);
+     String pushIntoQueue(CodeRequest codeRequest);
 
-     CodeDto getCurrentStatus(String projectId);
+     Status getCurrentStatus(String projectId);
 
      Code getCodeById(String projectId);
+
+     List<String> getStatus(String projectId, int statusId);
 
 
 }

@@ -23,10 +23,10 @@ public class CodeServiceImpl implements CodeService{
     @Override
     public String pushIntoQueue(CodeRequest codeRequest) {
         try{
-        // Create initial status
-        Status status = new Status("started compiling.....", new Date());
+        List<String> statusList = new ArrayList<>();
+        statusList.add("in Queue"); // Adding the first status update
+        Status status = new Status( 1,statusList, new Date());
         List<Status> statuses = Arrays.asList(status);
-
         // Map CodeRequest to CodeDto
         CodeDto codeDto = CodeDto.builder()
                 .content(codeRequest.getContent())
@@ -35,8 +35,8 @@ public class CodeServiceImpl implements CodeService{
 
         // Build Code object
         Code code = Code.builder()
-                .language(codeDto.getLanguage())
-                .content(codeDto.getContent())
+                .language(codeRequest.getLanguage())
+                .content(codeRequest.getContent())
                 .status(statuses)
                 .build();
 
@@ -59,13 +59,13 @@ public class CodeServiceImpl implements CodeService{
     }
 
     @Override
-    public CodeDto getCurrentStatus(String projectId) {
+    public Status getCurrentStatus(String projectId) {
         try{
             Code currCode = getCodeById(projectId);
-            return  CodeDto.builder()
-                    .content(currCode.getStatus().get(currCode.getStatus().size()-1).getStatus())
-                    .language(currCode.getLanguage())
-                    .projectId(currCode.getProjectId())
+            int n=currCode.getStatus().size();
+            return  Status.builder()
+                    .statusId(currCode.getStatus().get(n-1).getStatusId())
+                    .status(currCode.getStatus().get(n-1).getStatus())
                     .build();
 
         } catch (Exception e) {
@@ -81,6 +81,23 @@ public class CodeServiceImpl implements CodeService{
             throw new DatabaseException("Failed to retrieve code",e);
         }
 
+    }
+
+    @Override
+    public List<String> getStatus(String projectId, int statusId) {
+        List<String> statuses=new ArrayList<>();
+        try{
+            Code currCode = getCodeById(projectId);
+
+            for(int i=0;i<currCode.getStatus().size();i++){
+                         if(currCode.getStatus().get(i).getStatusId()==statusId){
+                               statuses.addAll(currCode.getStatus().get(i).getStatus());
+                         }
+            }
+        } catch (Exception e) {
+            throw new CustomException("Failed to fetch current status for projectId: " +projectId, e);
+        }
+        return statuses;
     }
 
 }

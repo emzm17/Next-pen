@@ -12,5 +12,4 @@ import java.util.Optional;
 public interface CodeRepository extends MongoRepository<Code,String> {
     Optional<Code> findByProjectId(String projectId);
 
-    List<Code> findAll();
 }

@@ -10,6 +10,5 @@ import org.springframework.lang.Nullable;
 public class CodeDto {
     private String language;
     private String content;
-
     private String projectId;
 }
