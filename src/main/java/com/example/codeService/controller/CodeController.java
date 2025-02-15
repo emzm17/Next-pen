@@ -16,7 +16,6 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000") // Frontend origin
 public class CodeController {
 
     private final CodeServiceImpl codeService;
