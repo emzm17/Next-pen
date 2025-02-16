@@ -15,7 +15,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("http://localhost:3000/")
+                        .allowedOrigins("https://next-pen-ui.vercel.app/")
                         .allowedMethods("GET", "POST", "OPTIONS", "DELETE", "PUT")
                         .allowedHeaders("*")
                         .allowCredentials(true);
