@@ -9,4 +9,6 @@ import lombok.Setter;
 public class CodeRequest {
     private String language;
     private String content;
+
+    private String input;
 }

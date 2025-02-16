@@ -31,6 +31,7 @@ public class CodeServiceImpl implements CodeService{
         CodeDto codeDto = CodeDto.builder()
                 .content(codeRequest.getContent())
                 .language(codeRequest.getLanguage())
+                .input(codeRequest.getInput())
                 .build();
 
         // Build Code object

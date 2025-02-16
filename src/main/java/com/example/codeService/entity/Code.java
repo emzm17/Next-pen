@@ -20,6 +20,7 @@ public class Code {
     private String language;
     private String content;
 
+
     @Field("statuses")
     private List<Status> status;
 }
